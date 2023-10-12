@@ -13,7 +13,7 @@ export default {
       let timer;
       window.clearTimeout(timer);
       timer = window.setTimeout(
-        window.matchMedia("(width<=576px)").matches
+        window.matchMedia("(width < 576px)").matches
           ? this.media = true
           : this.media = false
         , 500);
@@ -34,31 +34,115 @@ export default {
 </script>
 
 <template>
-  <header>
-    <img src="./assets/shared/logo.svg" alt="logo" />
+  <header class="header">
+    <img src="./assets/shared/logo.svg" alt="space tourism logo" class="logo" />
 
     <nav v-if="media">
-      <section v-if="isActive">
-        <img src="./assets/shared/icon-close.svg" alt="close icon" @click="toggleIsActive"/>
-        <router-link to="/" @click="toggleIsActive">01 Home</router-link> |
-        <router-link to="/destination" @click="toggleIsActive">02 Destination</router-link> |
-        <router-link to="/crew" @click="toggleIsActive">03 Crew</router-link> |
-        <router-link to="/technology" @click="toggleIsActive">04 Technology</router-link>
+      <section v-if="isActive" class="mobile navbar">
+        <img src="./assets/shared/icon-close.svg" alt="close icon" @click="toggleIsActive" class="close icon" />
+        <router-link to="/" @click="toggleIsActive" class="link"><span class="link-num">01</span> Home</router-link>
+        <router-link to="/destination" @click="toggleIsActive" class="link"><span class="link-num">02</span> Destination</router-link>
+        <router-link to="/crew" @click="toggleIsActive" class="link"><span class="link-num">03</span> Crew</router-link>
+        <router-link to="/technology" @click="toggleIsActive" class="link"><span class="link-num">04</span> Technology</router-link>
       </section>
-      <img src="./assets/shared/icon-hamburger.svg" alt="hamburger icon" v-else @click="toggleIsActive"/>
+      <img v-else src="./assets/shared/icon-hamburger.svg" alt="hamburger icon" @click="toggleIsActive" class="icon" />
     </nav>
 
-    <nav v-else>
-      <router-link to="/">01 Home</router-link> |
-      <router-link to="/destination">02 Destination</router-link> |
-      <router-link to="/crew">03 Crew</router-link> |
-      <router-link to="/technology">04 Technology</router-link>
+    <nav v-else class="full navbar">
+      <router-link to="/" class="link"><span class="link-num">01</span> Home</router-link>
+      <router-link to="/destination" class="link"><span class="link-num">02</span> Destination</router-link>
+      <router-link to="/crew" class="link"><span class="link-num">03</span> Crew</router-link>
+      <router-link to="/technology" class="link"><span class="link-num">04</span> Technology</router-link>
     </nav>
   </header>
 
-  <router-view></router-view>
+  <router-view class="view"></router-view>
 </template>
 
 <style lang="scss">
+  @use "sass:color";
   @import "main.scss";
+
+  .header {
+    background-color: transparent;
+    width: 100%;
+    position: absolute;
+    left: 0;
+    top: 0;
+    display: flex;
+    flex-flow: row nowrap;
+    align-items: center;
+    justify-content: space-between;
+    padding: 1rem;
+
+    .icon {
+      cursor: pointer;
+    }
+
+    .navbar {
+      display: flex;
+
+      .link {
+        font-family: $ff-sans-condensed;
+        color: color.adjust($clr-light, $alpha: -0.25);
+        text-decoration: none;
+        text-transform: uppercase;
+        padding-block: 2rem;
+
+        &:hover,
+        &:focus {
+          color: $clr-white;
+        }
+
+        .link-num {
+          font-weight: 600;
+          margin-right: 0.5rem;
+        }
+      }
+
+      .router-link-active {
+        color: $clr-white;
+        border-bottom: 0.2rem solid $clr-white;
+        padding-bottom: calc(2rem - 0.2rem);
+      }
+    }
+
+    .mobile.navbar {
+      flex-flow: column nowrap;
+      align-items: center;
+      justify-content: space-evenly;
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100vw;
+      height: 100vh;
+      background-image: linear-gradient(45deg, color.adjust($clr-dark, $alpha: -0.25), $clr-dark);
+      padding: 10vh 20vw 30vh;
+
+      .close.icon {
+        align-self: flex-end;
+      }
+    }
+  }
+
+  .view {
+    min-height: 100vh;
+  }
+
+  @media screen and (width >= 576px) {
+    .full.navbar {
+      flex-flow: row nowrap;
+      align-items: center;
+      justify-content: space-between;
+      gap: 2rem;
+      padding-inline: 2rem;
+      background-image: linear-gradient(to right, color.adjust($clr-dark, $alpha: -0.5), color.adjust($clr-light, $alpha: -0.5));
+    }
+  }
+
+  @media screen and (width >= 1024px) {
+    .full.navbar {
+      padding-inline: 8rem 4rem;
+    }
+  }
 </style>
