@@ -1,10 +1,13 @@
-<script> 
+<script>
+export default {
+  name: "HomeView"
+}
 </script>
 
 <template>
   <main class="home">
     <article class="article">
-      <p class="subtitle">so, you want to travel to</p>
+      <h2 class="subtitle">so, you want to travel to</h2>
       <h1 class="title">space</h1>
       <p class="para">Let’s face it, if you want to go to space, you might as well genuinely go to
       outer space and not hover kind of on the edge of it. Well sit back, and relax because we’ll 
@@ -21,20 +24,21 @@
     background-repeat: no-repeat;
     background-position: center;
     background-size: 100% 100%;
+    min-height: 100vh;
 
     .article {
       color: $clr-white;
       display: flex;
       flex-flow: column nowrap;
       align-items: center;
-      justify-content: space-evenly;
-      padding: 24vh 12vw;
+      justify-content: space-between;
+      padding: 20vh 10vw;
 
       .title {
         text-transform: uppercase;
         font-family: $ff-serif;
         font-size: min(16vw, 4rem);
-        padding-block: 3vh;
+        margin-top: 0.75rem;
       }
 
       .subtitle {
@@ -47,7 +51,7 @@
 
       .para {
         font-family: $ff-sans-normal;
-        font-size: min(4vw, 1rem);
+        font-size: min(3vw, 1rem);
         letter-spacing: 0.1rem;
         line-height: 1.5rem;
         text-align: center;
@@ -58,8 +62,14 @@
   @media screen and (width >= 576px) {
     .home {
       background-image: url("../assets/home/background-home-tablet.jpg");
-      .article > .title {
-        font-size: max(12vw, 4rem);
+      .article {
+        padding: 25vh 20vw;
+        .title {
+          font-size: max(12vw, 3rem);
+        }
+        .para {
+          font-size: max(1.5vw, 1rem);
+        }
       }
     }
   }
@@ -69,7 +79,7 @@
       background-image: url("../assets/home/background-home-desktop.jpg");
       .article {
         align-items: flex-start;
-        padding: 32vh 45vw 8vh 5vw;
+        padding: 30vh 50vw 10vh 10vw;
         .title {
           font-size: 12vw;
         }
@@ -78,7 +88,6 @@
           text-align: left;
         }
         .para {
-          font-size: min(2vw, 2rem);
           text-align: left;
         }
       }

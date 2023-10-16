@@ -40,23 +40,23 @@ export default {
     <nav v-if="media">
       <section v-if="isActive" class="mobile navbar">
         <img src="./assets/shared/icon-close.svg" alt="close icon" @click="toggleIsActive" class="close icon" />
-        <router-link to="/" @click="toggleIsActive" class="link"><span class="link-num">01</span> Home</router-link>
-        <router-link to="/destination" @click="toggleIsActive" class="link"><span class="link-num">02</span> Destination</router-link>
-        <router-link to="/crew" @click="toggleIsActive" class="link"><span class="link-num">03</span> Crew</router-link>
-        <router-link to="/technology" @click="toggleIsActive" class="link"><span class="link-num">04</span> Technology</router-link>
+        <router-link :to="{name: 'home'}" @click="toggleIsActive" class="link"><span class="link-num">00</span> Home</router-link>
+        <router-link :to="{name: 'destination'}" @click="toggleIsActive" class="link"><span class="link-num">01</span> Destination</router-link>
+        <router-link :to="{name: 'crew'}" @click="toggleIsActive" class="link"><span class="link-num">02</span> Crew</router-link>
+        <router-link :to="{name: 'technology'}" @click="toggleIsActive" class="link"><span class="link-num">03</span> Technology</router-link>
       </section>
       <img v-else src="./assets/shared/icon-hamburger.svg" alt="hamburger icon" @click="toggleIsActive" class="icon" />
     </nav>
 
     <nav v-else class="full navbar">
-      <router-link to="/" class="link"><span class="link-num">01</span> Home</router-link>
-      <router-link to="/destination" class="link"><span class="link-num">02</span> Destination</router-link>
-      <router-link to="/crew" class="link"><span class="link-num">03</span> Crew</router-link>
-      <router-link to="/technology" class="link"><span class="link-num">04</span> Technology</router-link>
+      <router-link :to="{name: 'home'}" class="link"><span class="link-num">00</span> Home</router-link>
+      <router-link :to="{name: 'destination'}" class="link"><span class="link-num">01</span> Destination</router-link>
+      <router-link :to="{name: 'crew'}" class="link"><span class="link-num">02</span> Crew</router-link>
+      <router-link :to="{name: 'technology'}" class="link"><span class="link-num">03</span> Technology</router-link>
     </nav>
   </header>
 
-  <router-view class="view"></router-view>
+  <router-view />
 </template>
 
 <style lang="scss">
@@ -96,7 +96,7 @@ export default {
 
         .link-num {
           font-weight: 600;
-          margin-right: 0.5rem;
+          margin-right: 0.25rem;
         }
       }
 
@@ -125,8 +125,11 @@ export default {
     }
   }
 
-  .view {
-    min-height: 100vh;
+  @media screen and (width < 576px) {
+    .logo {
+      width: 2rem;
+      aspect-ratio: 1;
+    }
   }
 
   @media screen and (width >= 576px) {
@@ -136,13 +139,13 @@ export default {
       justify-content: space-between;
       gap: 2rem;
       padding-inline: 2rem;
-      background-image: linear-gradient(to right, color.adjust($clr-dark, $alpha: -0.5), color.adjust($clr-light, $alpha: -0.5));
+      background-image: linear-gradient(to right, color.adjust($clr-dark, $alpha: -0.5), color.adjust($clr-light, $alpha: -0.75));
     }
   }
 
   @media screen and (width >= 1024px) {
     .full.navbar {
-      padding-inline: 8rem 4rem;
+      padding-inline: 12rem 4rem;
     }
   }
 </style>
