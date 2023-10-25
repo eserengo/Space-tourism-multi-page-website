@@ -25,7 +25,15 @@ const router = createRouter({
     {
       path: "/crew",
       name: "crew",
-      component: () => import("../views/CrewView.vue")
+      component: () => import("../views/CrewView.vue"),
+      redirect: { name: "crew.slug", params: { slug: "douglashurley" } },
+      children: [
+        {
+          path: ":slug",
+          name: "crew.slug",
+          component: () => import("../views/theCrew.vue")
+        }
+      ],
     },
     {
       path: "/technology",

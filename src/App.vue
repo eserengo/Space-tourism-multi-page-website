@@ -64,15 +64,13 @@ export default {
   @import "main.scss";
 
   .header {
+    @include flex-row;
+    justify-content: space-between;
     background-color: transparent;
     width: 100%;
     position: absolute;
     left: 0;
     top: 0;
-    display: flex;
-    flex-flow: row nowrap;
-    align-items: center;
-    justify-content: space-between;
     padding: 1rem;
 
     .icon {
@@ -80,18 +78,16 @@ export default {
     }
 
     .navbar {
-      display: flex;
-
       .link {
         font-family: $ff-sans-condensed;
-        color: color.adjust($clr-light, $alpha: -0.25);
+        color: color.adjust($clr-light, $alpha: -0.5);
         text-decoration: none;
         text-transform: uppercase;
         padding-block: 2rem;
 
-        &:hover,
-        &:focus {
-          color: $clr-white;
+        &:hover:not(.router-link-active),
+        &:focus:not(.router-link-active) {
+          color: color.adjust($clr-white, $alpha: -0.25);
         }
 
         .link-num {
@@ -108,16 +104,15 @@ export default {
     }
 
     .mobile.navbar {
-      flex-flow: column nowrap;
-      align-items: center;
+      @include flex-col;
       justify-content: space-evenly;
       position: fixed;
       top: 0;
       left: 0;
       width: 100vw;
       height: 100vh;
-      background-image: linear-gradient(45deg, color.adjust($clr-dark, $alpha: -0.25), $clr-dark);
-      padding: 10vh 20vw 30vh;
+      background-image: linear-gradient(45deg, color.adjust($clr-dark, $alpha: -0.025), color.adjust($clr-dark, $alpha: -0.05));
+      padding: 20vh 10vw;
 
       .close.icon {
         align-self: flex-end;
@@ -134,12 +129,11 @@ export default {
 
   @media screen and (width >= 576px) {
     .full.navbar {
-      flex-flow: row nowrap;
-      align-items: center;
+      @include flex-row;
       justify-content: space-between;
       gap: 2rem;
       padding-inline: 2rem;
-      background-image: linear-gradient(to right, color.adjust($clr-dark, $alpha: -0.5), color.adjust($clr-light, $alpha: -0.75));
+      background-image: linear-gradient(to right, color.adjust($clr-dark, $alpha: -0.9), color.adjust($clr-light, $alpha: -0.9));
     }
   }
 

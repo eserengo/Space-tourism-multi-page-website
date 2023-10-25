@@ -17,13 +17,76 @@ $ff-sans-normal: "Barlow", sans-serif;
   font-size: 16px;
 }
 
-*,
-*::after,
-*::before {
+* {
   box-sizing: border-box;
   max-width: 100%;
   padding: 0%;
   margin: 0%;
   user-select: none;
   font-weight: 400;
+}
+
+@mixin title {
+  text-transform: uppercase;
+  font-family: $ff-serif;
+  font-size: min(10vw, 4rem);
+
+  @media screen and (width >= 576px) {
+    font-size: max(8vw, 4rem);
+  }
+
+  @media screen and (width >= 1024px) {
+    font-size: 8vw;
+  }
+}
+
+@mixin subtitle {
+  text-transform: uppercase;
+  font-family: $ff-sans-condensed;
+  font-size: min(4vw, 1rem);
+  letter-spacing: 0.2rem;
+
+  @media screen and (width >= 576px) {
+    font-size: max(2vw, 1rem);
+  }
+
+  @media screen and (width >= 1024px) {
+    font-size: 2vw;
+    text-align: left;
+  }
+}
+
+@mixin para {
+  font-family: $ff-sans-normal;
+  font-size: min(3vw, 1rem);
+  letter-spacing: 0.1rem;
+  line-height: 1.5rem;
+  text-align: center;
+
+  @media screen and (width >= 576px) {
+    font-size: max(2vw, 1rem);
+  }
+
+  @media screen and (width >= 1024px) {
+    font-size: 2vw;
+    text-align: left;
+  }
+}
+
+@mixin flex-col {
+  display: flex;
+  flex-flow: column nowrap;
+  align-items: center;
+}
+
+@mixin flex-row {
+  display: flex;
+  flex-flow: row nowrap;
+  align-items: center;
+}
+
+@mixin bg {
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: 100% 100%;
 }
