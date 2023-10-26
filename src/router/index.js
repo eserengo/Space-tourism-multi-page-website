@@ -38,7 +38,15 @@ const router = createRouter({
     {
       path: "/technology",
       name: "technology",
-      component: () => import("../views/TechnologyView.vue")
+      component: () => import("../views/TechnologyView.vue"),
+      redirect: { name: "technology.slug", params: { slug: "launchvehicle" } },
+      children: [
+        {
+          path: ":slug",
+          name: "technology.slug",
+          component: () => import("../views/theTechnologies.vue")
+        }
+      ],
     },
   ]
 })
