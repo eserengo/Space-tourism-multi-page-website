@@ -17,8 +17,15 @@ export default {
 <template>
   <article class="image">
     <picture>
-      <source :srcset="`../src/assets/destination/${destination.images.png}`" media="(max-width: 1024px)" type="image/png" >
-      <img :src="`../src/assets/destination/${destination.images.webp}`" :alt="destination.name" >
+      <source
+        :srcset="`../src/assets/destination/${destination.images.png}`" 
+        media="(max-width: 1024px)"
+        type="image/png"
+      >
+      <img 
+        :src="`../src/assets/destination/${destination.images.webp}`" 
+        :alt="destination.name"
+      >
     </picture>
   </article>
 
@@ -41,70 +48,68 @@ export default {
 </template>
 
 <style lang="scss" scoped>
-  @use "sass:color";
-  @import "../main.scss";
+@use "sass:color";
+@import "../main.scss";
 
-  .image {
-    margin: 1rem;
-    order: 2;
+.image {
+  margin: 1rem;
+  order: 2;
+}
+.info {
+  @include flex-col;
+  order: 4;
+  .head {
+    @include title;
+    padding-top: 5vh;
   }
-
-  .info {
+  .body {
+    @include para;
+    padding-bottom: 5vh;
+    border-bottom: 1px solid color.adjust($clr-light, $alpha: -0.75);
+  }
+  .foot {
     @include flex-col;
-    order: 4;
-    .head {
-      @include title;
-      padding-top: 5vh;
+    .category {
+      @include subtitle;
+      margin: 5vh 0 2vh;
     }
-    .body {
-      @include para;
-      padding-bottom: 5vh;
-      border-bottom: 1px solid color.adjust($clr-light, $alpha: -0.75);
+    .value {
+      text-transform: uppercase;
+      font-family: $ff-serif;
+      font-size: min(8vw, 2rem);
     }
+  }
+}
+
+@media screen and (width < 1024px) {
+  .category,
+  .value {
+    text-align: center;
+  }
+}
+
+@media screen and (width >=1024px) {
+  .image {
+    grid-column: 1;
+    grid-row: 3;
+  }
+  .info {
+    align-items: flex-start;
+    grid-column: 2;
+    grid-row: 3;
     .foot {
-      @include flex-col;
+      width: 100%;
+      flex-direction: row;
+      justify-content: flex-start;
+      gap: max(4vw, 1rem);
       .category {
-        @include subtitle;
-        margin: 5vh 0 2vh;
+        text-align: left;
+        font-size: max(1.5vw, 1rem);
       }
       .value {
-        text-transform: uppercase;
-        font-family: $ff-serif;
-        font-size: min(8vw, 2rem);
+        text-align: left;
+        font-size: max(3vw, 1.5rem);
       }
     }
   }
-
-  @media screen and (width < 1024px) {
-    .category,
-    .value {
-      text-align: center;
-    }
-  }
-
-  @media screen and (width >= 1024px) {
-    .image {
-      grid-column: 1;
-      grid-row: 3;
-    }
-    .info {
-      align-items: flex-start;
-      grid-column: 2;
-      grid-row: 3;
-      .foot {
-        width: 100%;
-        flex-direction: row;
-        justify-content: flex-start;
-        gap: max(4vw, 1rem);
-        .category {
-          text-align: left;
-          font-size: max(1.5vw, 1rem);
-        }
-        .value {
-          text-align: left;
-          font-size: max(3vw, 1.5rem);
-        }
-      }
-    }
-  }
-</style>
+}</style>
