@@ -143,6 +143,7 @@ export default {
   left: 0;
   top: 0;
   padding: 1rem;
+  z-index: 3;
 
   .icon {
     cursor: pointer;

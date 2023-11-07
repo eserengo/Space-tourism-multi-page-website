@@ -35,7 +35,8 @@ export default {
   </main>
 </template>
 
-<style lang="scss" scoped> @use "sass:color";
+<style lang="scss" scoped>
+ @use "sass:color";
  @import "../main.scss";
 
  .crew {
